@@ -1,0 +1,12 @@
+{
+  "bootstrap": {
+      "buckets": {
+            "base": {
+                "/api": {
+                  "type":"AutoLoader",
+                  "source": "/build/"
+                }
+            }
+      }
+  }
+}

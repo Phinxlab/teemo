@@ -1,0 +1,25 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "cd build && node index",
+    "start": "npm run build && npm run init",
+    "watch": "cd ./build && nodemon ./index.js",
+    "compiler": "tsc -w",
+    "build": "tsc",
+    "docker:db": "docker run -d --name chino-example -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=local -p 5432:5432 postgres:10.14-alpine",
+    "migrate:create": "chino --create --migrate --config ./config/local/ormconfig.json --file ",
+    "migrate:up": "chino --migrate --up --config ",
+    "migrate:down": "chino --migrate --down --config "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@phinxlab/chino-sdk": "0.0.25",
+    "db-migrate": "^0.11.11",
+    "db-migrate-pg": "^1.2.2",
+    "typescript": "^3.9.7"
+  }
+}

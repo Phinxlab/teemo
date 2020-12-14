@@ -1,0 +1,21 @@
+{
+  "justRPC": {
+    "server": {
+      "port": 9099,
+      "basepath": ""
+    },
+    "security": {
+        "password": "I really like the chimichanga!",
+        "expiration":1
+    },
+    "const": {
+        "JR_LOGIN_PATH": "/platform/login",
+        "JR_LOGOUT_PATH": "/platform/logout",
+        "JR_STATUS_PATH": "/platform/status",
+        "JR_BODYPARSER_JSON_LIMIT": "50mb"
+    }
+  },
+  "app": {
+
+  }
+}

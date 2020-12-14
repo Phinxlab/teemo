@@ -1,0 +1,2 @@
+-- TODO EXAMPLE MIGRATION DOWN
+DROP TABLE IF EXISTS "public"."account";
