@@ -1,0 +1,42 @@
+
+
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      args:
+        NPM_TOKEN: e6eae2b7-1c54-4fa9-b16a-945000162f21
+
+    # volumes:
+    #   - "./:/user/src/app"
+    ports:
+      - "9099:9099"
+  db_teemo:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: teemo_dev
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - pgadmin4:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+volumes:
+  postgres:
+    external:
+      name: postgresTeemo
+  pgadmin4:
+    external:
+      name: pgadmin4Teemo

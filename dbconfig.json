@@ -1,0 +1,1 @@
+{"dev":{"host":"db_teemo","user":"postgres","password":"postgres","database":"teemo_dev","port":5432,"driver":"pg","multipleStatements":"true"},"sql-file":true}
