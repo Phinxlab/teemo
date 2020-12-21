@@ -12,7 +12,8 @@
     "docker:db": "docker run -d --name chino-example -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=local -p 5432:5432 postgres:10.14-alpine",
     "migrate:create": "chino --create --migrate --config ./config/local/ormconfig.json --file ",
     "migrate:up": "chino --migrate --up --config ",
-    "migrate:down": "chino --migrate --down --config "
+    "migrate:down": "chino --migrate --down --config ",
+    "release": "standard-version"
   },
   "author": "",
   "license": "ISC",
@@ -21,5 +22,16 @@
     "db-migrate": "^0.11.11",
     "db-migrate-pg": "^1.2.2",
     "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.6",
+    "standard-version": "^9.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
