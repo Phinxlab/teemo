@@ -1,0 +1,14 @@
+{
+  "relations": {
+    "team": { "user.teams": "team" },
+    "user_team": {
+      "team.userTeams": "user_team",
+      "user.userTeams": "user_team"
+    },
+    "status": {
+      "status_type.statuses": "status",
+      "team.statuses": "status",
+      "user.statuses": "status"
+    }
+  }
+}
