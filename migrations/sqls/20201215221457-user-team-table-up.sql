@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS user_team (
     FOREIGN KEY(id_team) REFERENCES team(id),
     created_at timestamp default now() not null,
     updated_at timestamp default now(),
-    deleted_at timestamp
+    deleted_at timestamp,
+    PRIMARY KEY(id_user, id_team)
 );
