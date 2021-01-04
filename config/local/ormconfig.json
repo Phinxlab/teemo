@@ -1,12 +1,12 @@
-  {
-    "name": "default",
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "postgres",
-    "password": "localhost",
-    "database": "local",
-    "schema": "public",
-    "synchronize": false,
-    "entities": ["../build/generated/orm/entities/index.js"]
-  }
+{
+  "name": "default",
+  "type": "postgres",
+  "host": "db_teemo",
+  "port": 5432,
+  "username": "postgres",
+  "password": "postgres",
+  "database": "teemo_dev",
+  "schema": "public",
+  "synchronize": false,
+  "entities": ["../build/generated/orm/entities/index.js"]
+}
