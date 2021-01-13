@@ -13,7 +13,10 @@
     "migrate:create": "chino --create --migrate --config ./config/local/ormconfig.json --file",
     "migrate:up": "chino --migrate --up --config ./config/local/ormconfig.json",
     "migrate:down": "chino --migrate --down --config ./config/local/ormconfig.json",
-    "release": "standard-version"
+    "release": "standard-version",
+    "lint": "eslint . --ext .ts,tsx,js",
+    "lint:fix": "eslint . --ext .ts,tsx,js --fix",
+    "format": "prettier --write \"**/*.+(ts|tsx|js|jsx)\""
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +29,8 @@
     "@phinxlab/chino-cli": "0.0.13",
     "husky": "^4.3.6",
     "standard-version": "^9.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "prettier": "2.2.1"
   },
   "husky": {
     "hooks": {

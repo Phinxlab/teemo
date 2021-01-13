@@ -1,10 +1,10 @@
-import {ChinoDAO} from "@phinxlab/chino-sdk";
-import {UserTeam} from "../entities";
+import { ChinoDAO } from '@phinxlab/chino-sdk';
+import { UserTeam } from '../entities';
 
 class UserTeamDAO extends ChinoDAO<UserTeam> {
-    constructor() {
-        super(UserTeam,'userteam');
-    }
+  constructor() {
+    super(UserTeam, 'userteam');
+  }
 }
-const i:UserTeamDAO = new UserTeamDAO();
-export {i as UserTeamDAO};
+const i: UserTeamDAO = new UserTeamDAO();
+export { i as UserTeamDAO };
