@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "teemo",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "compiler": "tsc -w",
     "build": "tsc",
     "docker:db": "docker run -d --name chino-example -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=local -p 5432:5432 postgres:10.14-alpine",
-    "migrate:create": "chino --create --migrate --config ./config/local/ormconfig.json --file ",
+    "migrate:create": "chino --create --migrate --config ./config/local/ormconfig.json --file",
     "migrate:up": "chino --migrate --up --config ./config/local/ormconfig.json",
     "migrate:down": "chino --migrate --down --config ./config/local/ormconfig.json",
     "release": "standard-version"
@@ -18,16 +18,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@phinxlab/chino-sdk": "0.0.25",
-    "db-migrate": "^0.11.11",
-    "db-migrate-pg": "^1.2.2",
-    "typescript": "^3.9.7"
+    "@phinxlab/chino-sdk": "0.0.25"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@phinxlab/chino-cli": "0.0.13",
     "husky": "^4.3.6",
-    "standard-version": "^9.0.0"
+    "standard-version": "^9.0.0",
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
