@@ -8,5 +8,10 @@
   "database": "teemo_dev",
   "schema": "public",
   "synchronize": false,
-  "entities": ["../build/generated/orm/entities/index.js"]
+  "entities": ["build/generated/orm/entities/index.js"],
+  "migrationsTableName": "migrations",
+  "migrations": ["build/migrations/*.js"],
+  "cli": {
+      "migrationsDir": "src/migrations"
+  }
 }

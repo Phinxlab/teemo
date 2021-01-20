@@ -2,10 +2,10 @@ import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } 
 
 export class InitialSchema1611080331481 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    /* --------------------------------------- USER TABLE ---------------------------------------*/
+    /* --------------------------------------- USERS TABLE ---------------------------------------*/
     await queryRunner.createTable(
       new Table({
-        name: 'user',
+        name: 'users',
         columns: [
           {
             name: 'id',
@@ -54,7 +54,7 @@ export class InitialSchema1611080331481 implements MigrationInterface {
     /* --------------------------------------- TEAM TABLE ---------------------------------------*/
     await queryRunner.createTable(
       new Table({
-        name: 'team',
+        name: 'teams',
         columns: [
           {
             name: 'id',
@@ -100,7 +100,7 @@ export class InitialSchema1611080331481 implements MigrationInterface {
       true
     );
 
-    await manyToOneTeamAndUser(queryRunner);
+    await manyToOneTeamsAndUsers(queryRunner);
 
     /* --------------------------------------- STATUS_TYPE TABLE ---------------------------------------*/
     await queryRunner.createTable(
@@ -139,10 +139,10 @@ export class InitialSchema1611080331481 implements MigrationInterface {
       true
     );
 
-    /* --------------------------------------- USER_TEAM TABLE ---------------------------------------*/
+    /* --------------------------------------- USERS_TEAMS_TEAM TABLE ---------------------------------------*/
     await queryRunner.createTable(
       new Table({
-        name: 'user_team',
+        name: 'users_teams_team',
         columns: [
           {
             name: 'role_user',
@@ -169,9 +169,9 @@ export class InitialSchema1611080331481 implements MigrationInterface {
       true
     );
 
-    await manyToOneUserTeamAndUser(queryRunner);
-    await manyToOneUserTeamAndTeam(queryRunner);
-    await primaryKeyForUserTeam(queryRunner);
+    await manyToOneUsersTeamsTeamAndUsers(queryRunner);
+    await manyToOneUsersTeamsTeamAndTeams(queryRunner);
+    await primaryKeyForUsersTeamsTeam(queryRunner);
 
     /* --------------------------------------- STATUS TABLE ---------------------------------------*/
     await queryRunner.createTable(
@@ -210,41 +210,41 @@ export class InitialSchema1611080331481 implements MigrationInterface {
       true
     );
 
-    await manyToOneStatusAndTeam(queryRunner);
-    await manyToOneStatusAndUser(queryRunner);
+    await manyToOneStatusAndTeams(queryRunner);
+    await manyToOneStatusAndUsers(queryRunner);
     await manyToOneStatusAndStatusType(queryRunner);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('status');
-    await queryRunner.dropTable('user_team');
-    await queryRunner.dropTable('status_type');
-    await queryRunner.dropTable('team');
-    await queryRunner.dropTable('user');
+    await queryRunner.dropTable('status', true);
+    await queryRunner.dropTable('users_teams_team', true);
+    await queryRunner.dropTable('status_type', true);
+    await queryRunner.dropTable('teams', true);
+    await queryRunner.dropTable('users', true);
   }
 }
 
-const manyToOneTeamAndUser = async (queryRunner: QueryRunner) => {
+const manyToOneTeamsAndUsers = async (queryRunner: QueryRunner) => {
   await queryRunner.addColumn(
-    'team',
+    'teams',
     new TableColumn({
       name: 'leader_id',
       type: 'int'
     })
   );
   await queryRunner.createForeignKey(
-    'team',
+    'teams',
     new TableForeignKey({
       columnNames: ['leader_id'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'user'
+      referencedTableName: 'users'
     })
   );
 };
 
-const manyToOneUserTeamAndUser = async (queryRunner: QueryRunner) => {
+const manyToOneUsersTeamsTeamAndUsers = async (queryRunner: QueryRunner) => {
   await queryRunner.addColumn(
-    'user_team',
+    'users_teams_team',
     new TableColumn({
       name: 'user_id',
       type: 'int'
@@ -252,18 +252,18 @@ const manyToOneUserTeamAndUser = async (queryRunner: QueryRunner) => {
   );
 
   await queryRunner.createForeignKey(
-    'user_team',
+    'users_teams_team',
     new TableForeignKey({
       columnNames: ['user_id'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'user'
+      referencedTableName: 'users'
     })
   );
 };
 
-const manyToOneUserTeamAndTeam = async (queryRunner: QueryRunner) => {
+const manyToOneUsersTeamsTeamAndTeams = async (queryRunner: QueryRunner) => {
   await queryRunner.addColumn(
-    'user_team',
+    'users_teams_team',
     new TableColumn({
       name: 'team_id',
       type: 'int'
@@ -271,16 +271,16 @@ const manyToOneUserTeamAndTeam = async (queryRunner: QueryRunner) => {
   );
 
   await queryRunner.createForeignKey(
-    'user_team',
+    'users_teams_team',
     new TableForeignKey({
       columnNames: ['team_id'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'team'
+      referencedTableName: 'teams'
     })
   );
 };
 
-const manyToOneStatusAndTeam = async (queryRunner: QueryRunner) => {
+const manyToOneStatusAndTeams = async (queryRunner: QueryRunner) => {
   await queryRunner.addColumn(
     'status',
     new TableColumn({
@@ -294,12 +294,12 @@ const manyToOneStatusAndTeam = async (queryRunner: QueryRunner) => {
     new TableForeignKey({
       columnNames: ['team_id'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'team'
+      referencedTableName: 'teams'
     })
   );
 };
 
-const manyToOneStatusAndUser = async (queryRunner: QueryRunner) => {
+const manyToOneStatusAndUsers = async (queryRunner: QueryRunner) => {
   await queryRunner.addColumn(
     'status',
     new TableColumn({
@@ -313,7 +313,7 @@ const manyToOneStatusAndUser = async (queryRunner: QueryRunner) => {
     new TableForeignKey({
       columnNames: ['user_id'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'user'
+      referencedTableName: 'users'
     })
   );
 };
@@ -337,6 +337,6 @@ const manyToOneStatusAndStatusType = async (queryRunner: QueryRunner) => {
   );
 };
 
-const primaryKeyForUserTeam = async (queryRunner: QueryRunner) => {
-  await queryRunner.createPrimaryKey('user_team', ['user_id', 'team_id']);
+const primaryKeyForUsersTeamsTeam = async (queryRunner: QueryRunner) => {
+  await queryRunner.createPrimaryKey('users_teams_team', ['user_id', 'team_id']);
 };
