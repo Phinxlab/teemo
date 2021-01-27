@@ -3,25 +3,25 @@
 var dbm;
 var type;
 var seed;
-var fs = require('fs');
-var path = require('path');
+import { readFile } from 'fs';
+import { join } from 'path';
 var Promise;
 
 /**
  * We receive the dbmigrate dependency from dbmigrate initially.
  * This enables us to not have to rely on NODE_PATH.
  */
-exports.setup = function (options, seedLink) {
+export function setup(options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
   seed = seedLink;
   Promise = options.Promise;
-};
+}
 
-exports.up = function (db) {
-  var filePath = path.join(__dirname, 'sqls', '20201215221908-status-table-up.sql');
+export function up(db) {
+  var filePath = join(__dirname, 'sqls', '20201215221908-status-table-up.sql');
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+    readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
       if (err) return reject(err);
       console.log('received data: ' + data);
 
@@ -30,12 +30,12 @@ exports.up = function (db) {
   }).then(function (data) {
     return db.runSql(data);
   });
-};
+}
 
-exports.down = function (db) {
-  var filePath = path.join(__dirname, 'sqls', '20201215221908-status-table-down.sql');
+export function down(db) {
+  var filePath = join(__dirname, 'sqls', '20201215221908-status-table-down.sql');
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+    readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
       if (err) return reject(err);
       console.log('received data: ' + data);
 
@@ -44,8 +44,8 @@ exports.down = function (db) {
   }).then(function (data) {
     return db.runSql(data);
   });
-};
+}
 
-exports._meta = {
+export const _meta = {
   version: 1
 };

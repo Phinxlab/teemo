@@ -16,6 +16,7 @@
     "release": "standard-version",
     "lint": "eslint . --ext .ts,tsx,js",
     "lint:fix": "eslint . --ext .ts,tsx,js --fix",
+    "lint:zero-warnings": "eslint . --ext .ts,tsx,js --max-warnings=0",
     "format": "prettier --write \"**/*.+(ts|tsx|js|jsx)\""
   },
   "author": "",
@@ -27,13 +28,19 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@phinxlab/chino-cli": "0.0.13",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.6",
     "standard-version": "^9.0.0",
-    "typescript": "^3.9.7",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run lint:zero-warnings",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
